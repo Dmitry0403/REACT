@@ -1,0 +1,122 @@
+.card {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 275px;
+  margin: 10px;
+
+  border-radius: 5px;
+  background-color: #d3d6d8;
+}
+
+.card:first-child {
+  padding-bottom: 40px;
+}
+
+.card__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 40px;
+}
+
+.card__title-text {
+  padding: 10px 20px;
+
+  text-align: left;
+
+  color: #172b4d;
+
+  font-size: 22px;
+  font-weight: 500;
+}
+
+.card__list {
+  overflow: hidden;
+
+  width: 255px;
+  margin-right: 5px;
+  padding: 0 10px;
+
+  text-align: end;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.card_list-tasks {
+  overflow: hidden;
+
+  padding: 0 10px;
+
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.card__button {
+  position: absolute;
+  bottom: 0;
+
+  display: flex;
+
+  width: 100%;
+
+  color: #5e6c84;
+}
+
+.textarea {
+  overflow: hidden;
+
+  margin: 0 10px;
+
+  word-break: break-all;
+
+  box-shadow: 0 0 5px rgb(100, 100, 100);
+  overflow-wrap: break-word;
+}
+
+textarea {
+  overflow: hidden;
+
+  width: 100%;
+  padding: 0 5px;
+
+  resize: auto;
+  word-break: break-all;
+
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgb(100, 100, 100);
+  overflow-wrap: break-word;
+}
+
+.task {
+  overflow: hidden;
+
+  min-height: 30px;
+  margin: 10px;
+  padding: 0 5px;
+
+  white-space: normal;
+
+  word-break: break-all;
+
+  border-radius: 5px;
+
+  background-color: rgb(233, 233, 233);
+  box-shadow: 0 0 5px rgb(100, 100, 100);
+  overflow-wrap: break-word;
+}
+
+.task:hover {
+  cursor: pointer;
+
+  background-color: rgb(204, 202, 202);
+  box-shadow: 0 0 5px rgb(100, 100, 100);
+}
+
+@media (max-width: 800px) {
+  .card {
+    width: 70%;
+  }
+}

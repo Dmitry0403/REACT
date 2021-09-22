@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px;
+
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.logo {
+  display: inline-block;
+}
+
+.logo a {
+  text-decoration: none;
+
+  color: honeydew;
+}
+
+.logo:hover a {
+  transition: color 0.3s ease;
+  
+  color: rgb(133, 145, 163);
+}
+
+.icon-menu {
+  padding: 10px 30px;
+
+  font-size: 26px;
+  font-weight: 600;
+
+  color: honeydew;
+}
+
+.icon-menu:hover {
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  color: rgb(14, 7, 32);
+}
