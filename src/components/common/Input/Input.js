@@ -1,1 +1,5 @@
-import { css } from "./styles.modules.css"
+import "./styles.css"
+
+export function Input(){
+    return <input className="input"/>
+}

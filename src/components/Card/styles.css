@@ -68,24 +68,10 @@
 .textarea {
   overflow: hidden;
 
-  margin: 0 10px;
+  margin: 5px 10px;
 
   word-break: break-all;
 
-  box-shadow: 0 0 5px rgb(100, 100, 100);
-  overflow-wrap: break-word;
-}
-
-textarea {
-  overflow: hidden;
-
-  width: 100%;
-  padding: 0 5px;
-
-  resize: auto;
-  word-break: break-all;
-
-  border-radius: 5px;
   box-shadow: 0 0 5px rgb(100, 100, 100);
   overflow-wrap: break-word;
 }
