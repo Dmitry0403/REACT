@@ -76,31 +76,6 @@
   overflow-wrap: break-word;
 }
 
-.task {
-  overflow: hidden;
-
-  min-height: 30px;
-  margin: 10px;
-  padding: 0 5px;
-
-  white-space: normal;
-
-  word-break: break-all;
-
-  border-radius: 5px;
-
-  background-color: rgb(233, 233, 233);
-  box-shadow: 0 0 5px rgb(100, 100, 100);
-  overflow-wrap: break-word;
-}
-
-.task:hover {
-  cursor: pointer;
-
-  background-color: rgb(204, 202, 202);
-  box-shadow: 0 0 5px rgb(100, 100, 100);
-}
-
 @media (max-width: 800px) {
   .card {
     width: 70%;
