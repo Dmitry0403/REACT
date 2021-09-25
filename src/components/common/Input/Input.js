@@ -1,5 +1,5 @@
 import "./styles.css"
 
-export function Input(){
-    return <input className="input"/>
+export function Input(props){
+    return <input className="input" onChange={props.onChange} onBlur={props.onBlur}/>
 }
