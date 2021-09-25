@@ -1,12 +1,12 @@
 import "../styles/styles.css";
 import { Header } from "./Header";
-import { Main } from "./Main";
+import { TasksBoard } from "./TasksBoard";
 
 export function App() {
   return (
     <div>
       <Header />
-      <Main />
+      <TasksBoard />
     </div>
   );
 }

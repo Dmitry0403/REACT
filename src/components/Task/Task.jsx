@@ -2,7 +2,7 @@ import "./styles.css";
 
 function Task(props) {
   return (
-    <div className={`task ${props.class}`} id={props.id}>
+    <div className="task" id={props.id}>
       {props.text}
     </div>
   );
@@ -15,7 +15,6 @@ export function Tasks(props) {
       {tasksArray.map((task) => (
         <Task
           key={task.id}
-          class={task.position}
           id={task.id}
           text={task.title}
         />
