@@ -38,7 +38,7 @@ export class TasksBoard extends React.Component {
     });
   };
 
-  onEditEnd = (value) => {
+  handleEditEnd = (value) => {
     if (!value) return;
     const tasksArray = this.state.tasksArray;
     this.setState({
@@ -58,7 +58,7 @@ export class TasksBoard extends React.Component {
           <div className="container-cards">
             <EditableCard
               isActive={isActive}
-              onEditEnd={this.onEditEnd}
+              onEditEnd={this.handleEditEnd}
               onClick={this.handleClick}
               onClickCancel={this.handleCancel}
               tasksArray={tasksArray.filter((task) => task.position === "todo")}
