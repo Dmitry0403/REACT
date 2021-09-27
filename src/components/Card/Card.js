@@ -13,7 +13,7 @@ export function Card(props) {
       </div>
       <div className="card_list">
         <div className="card_list-tasks" id={props.title}>
-          {tasksArray && <Tasks tasksArray={tasksArray} />}
+          {tasksArray && <Tasks tasksArray={tasksArray} onClickTask={props.onClickTask}/>}
         </div>
         <div className="textarea">
           {isActive && (

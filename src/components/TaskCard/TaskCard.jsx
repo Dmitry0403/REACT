@@ -7,106 +7,111 @@ export function TaskCard(props) {
     <div className={css.wrapper}>
       <div className={css.card}>
         <div className={css.header}>
-          <div className={css.header - left}>
+          <div className={css.headerLeft}>
             <Input
-              className={css.header - title}
+              class={css.headerTitle}
               onChange={props.onChangeTitle}
               onBlur={props.onBlurTitle}
-            >
-              {props.task.title}
-            </Input>
-            <div className={css.header - status}>
+              value={props.task.title}
+            />
+            <div className={css.headerStatus}>
               колонка нахождения
-              <span className={css.header - status_span}>
+              <span className={css.headerStatusSpan}>
                 {props.task.position}
               </span>
               <span className="icn__btneye"></span>
             </div>
           </div>
-          <Button
-            className={css.header - right}
-            text="X"
-            onClick={props.onCloseTaskCard}
-          />
+          <div>
+            <Button
+              class={css.headerRight}
+              text="X"
+              onClick={props.onCloseTaskCard}
+            />
+          </div>
         </div>
-        <div className={css.info - wrapper}>
-          <div className={css.info - container}>
+        <div className={css.infoWrapper}>
+          <div className={css.infoContainer}>
             <div className={css.info}>
-              <div className={css.info - users}>
-                <div className={css.info - users_title}>УЧАСТНИКИ</div>
-                <div className={css.info - users_name}>{props.task.users}</div>
+              <div className={css.infoUsers}>
+                <div className={css.infoUsersTitle}>УЧАСТНИКИ</div>
+                <div className={css.infoUsersName}>
+                  {/* {props.task.users} */}
+                </div>
               </div>
-              <div className={css.info - term}>
-                <div className={css.info - term_title}>СРОК</div>
-                <div className={css.info - term_wrapper}>
-                  <div className={css.info - term_date}>{props.task.date}</div>
+              <div className={css.infoTerm}>
+                <div className={css.infoTermTitle}>СРОК</div>
+                <div className={css.infoTermWrapper}>
+                  <div className={css.infoTermDate}>
+                    {/* {props.task.date} */}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className={css.info - description}>
-              <div className={css.info - description_wrapper}>
-                <div className={css.info - description_title}>
-                  Описание задачи
-                </div>
+            <div className={css.infoDescription}>
+              <div className={css.infoDescriptionWrapper}>
+                <div className={css.infoDescriptionTitle}>Описание задачи</div>
               </div>
-              <div className={css.info - description_text}>
+              <div className={css.infoDescriptionText}>
                 <Input
-                  class={css.info - description_input}
+                  class={css.infoDescriptionInput}
                   placeholder={"Введите описание задачи!"}
                   onChange={props.onChangeDescription}
                   onBlur={props.onBlurDescription}
-                >
-                  {props.task.description}
-                </Input>
+                  // value={props.task.description}
+                />
               </div>
             </div>
-            <div className={css.info - comment}>
-              <div className={css.info - comment_wrapper}>
-                <div className={css.info - comment_title}>Комментарий</div>
+            <div className={css.infoComment}>
+              <div className={css.infoCommentWrapper}>
+                <div className={css.infoCommentTitle}>Комментарий</div>
               </div>
-              <div className={css.info - comment_text}>
+              <div className={css.infoCommentText}>
                 <Input
-                  class={css.info - comment_input}
+                  class={css.infoCommentInput}
                   placeholder={"Напишите комментарий..."}
                   onChange={props.onChangeComment}
                   onBlur={props.onBlurComment}
-                >
-                  {props.task.comment}
-                </Input>
+                  // value={props.task.comment}
+                />
               </div>
             </div>
           </div>
-          <div className={css.action - container}>
+          <div className={css.actionContainer}>
             <ul className={css.action}>
-              <div className={css.action - title}>ДОБАВИТЬ НА КАРТОЧКУ</div>
+              <div className={css.actionTitle}>ДОБАВИТЬ НА КАРТОЧКУ</div>
               <li>
                 <Button
                   icon={"icn__btnuser"}
-                  class={css.action - button}
+                  class={css.actionButton}
+                  text={"Участники"}
                   onClick={props.onClickUser}
                 />
               </li>
               <li>
                 <Button
                   icon={"icn__btnaccess_time"}
-                  class={css.action - button}
+                  class={css.actionButton}
+                  text={"Дата"}
                   onClick={props.onClickDate}
                 />
               </li>
             </ul>
             <ul className={css.action}>
-              <div className={css.action - title}>ДЕЙСТВИЯ</div>
+              <div className={css.actionTitle}>ДЕЙСТВИЯ</div>
               <li>
                 <Button
                   icon={"icn__btnarrow-right2"}
-                  class={css.action - button}
+                  class={css.actionButton}
+                  text={"Перемещение"}
                   onClick={props.onClickMoving}
                 />
               </li>
               <li>
                 <Button
                   icon={"icn__btnvideo_label"}
-                  class={css.action - button}
+                  class={css.actionButton}
+                  text={"Удаление"}
                   onClick={props.onClickRemoving}
                 />
               </li>
@@ -115,7 +120,8 @@ export function TaskCard(props) {
               <li>
                 <Button
                   icon={"icn__btnattachment"}
-                  class={css.action - button}
+                  class={css.actionButton}
+                  text={"Сохранить"}
                   onClick={props.onClickSaving}
                 />
               </li>
