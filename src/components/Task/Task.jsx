@@ -1,8 +1,8 @@
-import "./styles.css";
+import css from "./styles.module.css";
 
 function Task(props) {
   return (
-    <div className="task" id={props.id}>
+    <div className={css.task} id={props.id} onClick={props.onClickTask}>
       {props.text}
     </div>
   );
@@ -17,6 +17,7 @@ export function Tasks(props) {
           key={task.id}
           id={task.id}
           text={task.title}
+          onClickTask={() => props.onClickTask(task.id)}
         />
       ))}
     </div>
