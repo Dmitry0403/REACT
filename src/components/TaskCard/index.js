@@ -1,1 +1,1 @@
-export { TaskCrad } from "./TaskCard"
+export { TaskCard } from "./TaskCard"

@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/styles.css";
 import { Header } from "./Header";
 import { TasksBoard } from "./TasksBoard";
-import { TaskCard } from "./TaskCard/TaskCard";
+import { TaskCard } from "./TaskCard";
 
 export class App extends React.Component {
   state = {
