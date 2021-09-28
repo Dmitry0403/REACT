@@ -4,6 +4,12 @@ import { Header } from "./Header";
 import { TasksBoard } from "./TasksBoard";
 import { TaskCard } from "./TaskCard";
 
+export const TASK_STATUSES = {
+  todo: "todo",
+  inProgress: "in_progress",
+  done: "done",
+};
+
 export class App extends React.Component {
   state = {
     isActiveTaskCard: false,
@@ -28,7 +34,7 @@ export class App extends React.Component {
   }
 
   handleEditEnd = (value) => {
-    if (!value) return;
+    if (!value.trim()) return;
     const tasksArray = this.state.tasksArray;
     this.setState({
       tasksArray: tasksArray.concat([
@@ -38,12 +44,26 @@ export class App extends React.Component {
     });
   };
 
+  handleEdit = (value, id, place) => {
+    if (!value.trim()) return;
+    const tasksArray = this.state.tasksArray;
+    tasksArray.map((task) => {
+      if (task.id === id) {
+        task[place] = value;
+      }
+      return task;
+    });
+    this.setState({
+      tasksArray,
+    });
+  };
+
   handleClickTask = (id) => {
     const tasksArray = this.state.tasksArray;
     const activeTask = tasksArray.filter((task) => task.id === id);
     this.setState({
       isActiveTaskCard: true,
-      activeTask:activeTask[0]
+      activeTask: activeTask[0],
     });
   };
 
@@ -64,7 +84,11 @@ export class App extends React.Component {
           onClickTask={this.handleClickTask}
         />
         {isActiveTaskCard && (
-          <TaskCard onCloseTaskCard={this.handleCloseTaskCard} task={activeTask}/>
+          <TaskCard
+            onCloseTaskCard={this.handleCloseTaskCard}
+            task={activeTask}
+            onEdit={this.handleEdit}
+          />
         )}
       </div>
     );
