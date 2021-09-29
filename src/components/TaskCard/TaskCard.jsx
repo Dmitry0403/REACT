@@ -1,9 +1,12 @@
+import React from "react";
 import css from "./styles.module.css";
+import { TASK_STATUSES } from "../App";
 import { Input } from "components/common/Input";
 import { Button } from "components/common/Button";
 import { PortModal } from "../PortModal";
-import { Date } from "../Date";
-import React from "react";
+import { DateCard } from "../DateCard";
+import { EventCard } from "components/EventCard/EventCard";
+import { LimitCard } from "components/LimitCard/LimitCard";
 
 export class TaskCard extends React.Component {
   constructor(props) {
@@ -44,11 +47,17 @@ export class TaskCard extends React.Component {
     });
   };
 
+  handleClosePortModal = () => {
+    this.setState({
+      isActivePortModal: false,
+    });
+  };
+
   handleClickDate = () => {
     this.setState({
       isActivePortModal: true,
       component: (
-        <Date
+        <DateCard
           onClickClosePortModal={this.handleClosePortModal}
           onChangeDate={this.handleChangeDate}
           value={this.state.valueDate}
@@ -66,11 +75,78 @@ export class TaskCard extends React.Component {
       users: this.state.valueUsers,
       id: this.props.task.id,
     };
-    console.log(activeTask);
     this.props.onEdit(activeTask);
   };
 
-  handleClosePortModal = () => {
+  onClickMoving = () => {
+    const tasksArray = this.props.tasksArray;
+    const activePosition = this.props.task.position;
+    let text;
+    let position;
+    switch (activePosition) {
+      case TASK_STATUSES.todo:
+        const tasksInProgress = tasksArray.filter(
+          (task) => task.position === TASK_STATUSES.in_progress
+        );
+        if (tasksInProgress.length >= 6) {
+          this.setState({
+            isActivePortModal: true,
+            component: <LimitCard onClickCancel={this.handleClosePortModal} />,
+          });
+          return;
+        } else {
+          text = "переместить в колонку IN_PROGRESS";
+          position = TASK_STATUSES.in_progress;
+        }
+        break;
+      case TASK_STATUSES.in_progress:
+        text = "переместить в колонку DONE";
+        position = TASK_STATUSES.done;
+        break;
+      case TASK_STATUSES.done:
+        text = "переместить в колонку TODO";
+        position = TASK_STATUSES.todo;
+        break;
+      default:
+    }
+    this.setState({
+      isActivePortModal: true,
+      component: (
+        <EventCard
+          title={"Перемещение задачи"}
+          text={text}
+          onClick={() => this.handleClickMoving(position)}
+          onClickCancel={this.handleClosePortModal}
+        />
+      ),
+    });
+  };
+
+  handleClickMoving = (position) => {
+    const task = this.props.task;
+    this.props.onEditMoving(task, position);
+    this.setState({
+      isActivePortModal: false,
+    });
+  };
+
+  onClickRemoving = () => {
+    this.setState({
+      isActivePortModal: true,
+      component: (
+        <EventCard
+          title={"Удаление"}
+          text={"удалить задачу?"}
+          onClick={this.handleClickRemoving}
+          onClickCancel={this.handleClosePortModal}
+        />
+      ),
+    });
+  };
+
+  handleClickRemoving = () => {
+    const task = this.props.task;
+    this.props.onEditRemoving(task);
     this.setState({
       isActivePortModal: false,
     });
@@ -87,7 +163,6 @@ export class TaskCard extends React.Component {
               <Input
                 class={css.headerTitle}
                 onChange={this.handleChangeTitle}
-                onBlur={this.handleBlurTitle}
                 value={this.state.valueTitle}
               />
               <div className={css.headerStatus}>
@@ -112,7 +187,7 @@ export class TaskCard extends React.Component {
                 <div className={css.infoUsers}>
                   <div className={css.infoUsersTitle}>УЧАСТНИКИ</div>
                   <div className={css.infoUsersName}>
-                    {this.state.valueUsers || ""}
+                    {this.state.valueUsers}
                   </div>
                 </div>
                 <div className={css.infoTerm}>
@@ -135,7 +210,6 @@ export class TaskCard extends React.Component {
                     class={css.infoDescriptionInput}
                     placeholder={"Введите описание задачи!"}
                     onChange={this.handleChangeDescription}
-                    onBlur={this.handleBlurDescription}
                     value={this.state.valueDescription}
                   />
                 </div>
@@ -149,7 +223,6 @@ export class TaskCard extends React.Component {
                     class={css.infoCommentInput}
                     placeholder={"Напишите комментарий..."}
                     onChange={this.handleChangeComment}
-                    onBlur={this.handleBlurComment}
                     value={this.state.valueComment}
                   />
                 </div>
@@ -182,7 +255,7 @@ export class TaskCard extends React.Component {
                     icon={"icn__btnarrow-right2"}
                     class={css.actionButton}
                     text={"Перемещение"}
-                    onClick={this.props.onClickMoving}
+                    onClick={this.onClickMoving}
                   />
                 </li>
                 <li>
@@ -190,7 +263,7 @@ export class TaskCard extends React.Component {
                     icon={"icn__btnvideo_label"}
                     class={css.actionButton}
                     text={"Удаление"}
-                    onClick={this.props.onClickRemoving}
+                    onClick={this.onClickRemoving}
                   />
                 </li>
               </ul>
