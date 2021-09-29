@@ -1,6 +1,8 @@
 import css from "./styles.module.css";
 import { Input } from "components/common/Input";
 import { Button } from "components/common/Button";
+import { PortModal } from "../PortModal";
+import { Date } from "../Date";
 import React from "react";
 
 export class TaskCard extends React.Component {
@@ -11,6 +13,9 @@ export class TaskCard extends React.Component {
       valueDescription: this.props.task.description || "",
       valueComment: this.props.task.comment || "",
       valueDate: this.props.task.date || "",
+      valueUsers: this.props.task.users || "",
+      isActivePortModal: false,
+      component: {},
     };
   }
 
@@ -20,22 +25,10 @@ export class TaskCard extends React.Component {
     });
   };
 
-  handleBlurTitle = () => {
-    this.props.onEdit(this.state.valueTitle, this.props.task.id, "title");
-  };
-
   handleChangeDescription = (e) => {
     this.setState({
       valueDescription: e.target.value,
     });
-  };
-
-  handleBlurDescription = () => {
-    this.props.onEdit(
-      this.state.valueDescription,
-      this.props.task.id,
-      "description"
-    );
   };
 
   handleChangeComment = (e) => {
@@ -44,11 +37,48 @@ export class TaskCard extends React.Component {
     });
   };
 
-  handleBlurComment = () => {
-    this.props.onEdit(this.state.valueComment, this.props.task.id, "comment");
+  handleChangeDate = (e) => {
+    this.setState({
+      valueDate: e.target.value,
+      isActivePortModal: false,
+    });
+  };
+
+  handleClickDate = () => {
+    this.setState({
+      isActivePortModal: true,
+      component: (
+        <Date
+          onClickClosePortModal={this.handleClosePortModal}
+          onChangeDate={this.handleChangeDate}
+          value={this.state.valueDate}
+        />
+      ),
+    });
+  };
+
+  handleClickSaving = () => {
+    const activeTask = {
+      title: this.state.valueTitle,
+      description: this.state.valueDescription,
+      comment: this.state.valueComment,
+      date: this.state.valueDate,
+      users: this.state.valueUsers,
+      id: this.props.task.id,
+    };
+    console.log(activeTask);
+    this.props.onEdit(activeTask);
+  };
+
+  handleClosePortModal = () => {
+    this.setState({
+      isActivePortModal: false,
+    });
   };
 
   render() {
+    const component = this.state.component;
+    const isActivePortModal = this.state.isActivePortModal;
     return (
       <div className={css.wrapper}>
         <div className={css.card}>
@@ -82,7 +112,7 @@ export class TaskCard extends React.Component {
                 <div className={css.infoUsers}>
                   <div className={css.infoUsersTitle}>УЧАСТНИКИ</div>
                   <div className={css.infoUsersName}>
-                    {this.props.task.users || ""}
+                    {this.state.valueUsers || ""}
                   </div>
                 </div>
                 <div className={css.infoTerm}>
@@ -141,7 +171,7 @@ export class TaskCard extends React.Component {
                     icon={"icn__btnaccess_time"}
                     class={css.actionButton}
                     text={"Дата"}
-                    onClick={this.props.onClickDate}
+                    onClick={this.handleClickDate}
                   />
                 </li>
               </ul>
@@ -170,13 +200,14 @@ export class TaskCard extends React.Component {
                     icon={"icn__btnattachment"}
                     class={css.actionButton}
                     text={"Сохранить"}
-                    onClick={this.props.onClickSaving}
+                    onClick={this.handleClickSaving}
                   />
                 </li>
               </ul>
             </div>
           </div>
         </div>
+        {isActivePortModal && <PortModal>{component}</PortModal>}
       </div>
     );
   }

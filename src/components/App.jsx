@@ -44,17 +44,21 @@ export class App extends React.Component {
     });
   };
 
-  handleEdit = (value, id, place) => {
-    if (!value.trim()) return;
+  handleEdit = (value) => {
     const tasksArray = this.state.tasksArray;
     tasksArray.map((task) => {
-      if (task.id === id) {
-        task[place] = value;
+      if (task.id === value.id) {
+        task.title = value.title;
+        task.description = value.description;
+        task.comment = value.comment;
+        task.date = value.date;
+        task.users = value.users;
       }
       return task;
     });
     this.setState({
       tasksArray,
+      isActiveTaskCard: false,
     });
   };
 
