@@ -2,7 +2,7 @@ import css from "./styles.module.css";
 import { Input } from "components/common/Input";
 import { Button } from "components/common/Button";
 
-export function Date(props) {
+export function DateCard(props) {
   return (
     <div className={css.cardWrapper}>
       <div className={css.card}>

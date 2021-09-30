@@ -6,7 +6,7 @@ import { TaskCard } from "./TaskCard";
 
 export const TASK_STATUSES = {
   todo: "todo",
-  inProgress: "in_progress",
+  in_progress: "in_progress",
   done: "done",
 };
 
@@ -44,20 +44,43 @@ export class App extends React.Component {
     });
   };
 
-  handleEdit = (value) => {
+  handleEdit = (obj) => {
     const tasksArray = this.state.tasksArray;
     tasksArray.map((task) => {
-      if (task.id === value.id) {
-        task.title = value.title;
-        task.description = value.description;
-        task.comment = value.comment;
-        task.date = value.date;
-        task.users = value.users;
+      if (task.id === obj.id) {
+        task.title = obj.title;
+        task.description = obj.description;
+        task.comment = obj.comment;
+        task.date = obj.date;
+        task.users = obj.users;
       }
       return task;
     });
     this.setState({
       tasksArray,
+      isActiveTaskCard: false,
+    });
+  };
+
+  handleEditMoving = (obj, position) => {
+    const tasksArray = this.state.tasksArray;
+    tasksArray.map((task) => {
+      if (task.id === obj.id) {
+        task.position = position;
+      }
+      return task;
+    });
+    this.setState({
+      tasksArray,
+      isActiveTaskCard: false,
+    });
+  };
+
+  handleEditRemoving = (obj) => {
+    const tasksArray = this.state.tasksArray;
+    const newTasksArray = tasksArray.filter((task) => task.id !== obj.id);
+    this.setState({
+      tasksArray: newTasksArray,
       isActiveTaskCard: false,
     });
   };
@@ -89,9 +112,12 @@ export class App extends React.Component {
         />
         {isActiveTaskCard && (
           <TaskCard
-            onCloseTaskCard={this.handleCloseTaskCard}
+            tasksArray={tasksArray}
             task={activeTask}
+            onCloseTaskCard={this.handleCloseTaskCard}
             onEdit={this.handleEdit}
+            onEditMoving={this.handleEditMoving}
+            onEditRemoving={this.handleEditRemoving}
           />
         )}
       </div>

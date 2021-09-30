@@ -1,0 +1,38 @@
+.eventCard {
+	align-items: center;
+	justify-content: center;
+
+	min-height: 130px;
+    min-width: 300px;
+	margin: 20px auto;
+
+	text-align: center;
+
+	border: 1px groove #172B4D;
+	border-radius: 5px;
+	background-color: #F4F5F7;
+}
+
+.eventCardTitle {
+	margin-bottom: 15px;
+	padding: 10px;
+
+	color: #172B4D;
+	background-color: rgba(9, 30, 66, 0.205);
+
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.eventCardText {
+	padding: 10px 10px;
+
+	font-size: 18px;
+}
+
+.eventCardFooter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
