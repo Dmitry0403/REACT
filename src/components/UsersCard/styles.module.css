@@ -1,0 +1,218 @@
+.overlay {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.user {
+    position: absolute;
+	z-index: 20;
+	top: 180px;
+	right: 250px;
+
+	flex-direction: column;
+
+	width: 300px;
+	height: 390px;
+	padding: 5px;
+
+	color: #3C5279;
+	border-radius: 5px;
+	background-color: white;
+
+	font-size: 14px;
+}
+
+.userHeader {
+	display: grid;
+
+	height: 40px;
+	margin-bottom: 5px;
+
+	color: #172B4D;
+	border-width: 1px;
+	border-bottom-style: solid;
+
+	font-size: 25px;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: 'none title exit';
+	grid-gap: 5px;
+}
+
+.userHeaderTitle {
+	padding-top: 10px;
+
+	text-align: center;
+	grid-area: title;
+}
+
+.userCancel {
+	width: 35px;
+	height: 35px;
+	margin-right: 10px;
+	margin-left: 30px;
+	padding: 3px;
+
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+
+	border-style: solid;
+	border-color: rgb(226, 226, 226);
+	border-radius: 70px;
+	background-color: rgb(226, 226, 226);
+	grid-area: exit;
+}
+
+.userCancel:hover {
+	border-color: rgb(194, 182, 182);
+	background-color: rgb(194, 182, 182);
+}
+
+.userListWrapper {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+
+	text-align: center;
+
+	font-size: 20px;
+}
+
+.app {
+	overflow-x: hidden;
+	overflow-y: scroll;
+
+	width: auto;
+	width: 290px;
+	height: 300px;
+	padding: 5px;
+}
+
+.app::-webkit-scrollbar {
+	display: none;
+}
+
+.userList {
+	display: flex;
+	align-items: flex-start;
+
+	margin-bottom: 5px;
+}
+
+.userList:last-child {
+	margin-bottom: 0;
+}
+
+.userList:hover {
+	cursor: pointer;
+
+	background-color: rgba(9, 30, 66, 0.04);
+}
+
+.userListAvatar {
+	width: 45px;
+	height: 45px;
+	margin-right: 10px;
+
+	border-style: solid;
+	border-color: rgb(226, 226, 226);
+	border-radius: 70px;
+	background-color: rgb(226, 226, 226);
+}
+
+.userListAvatar:hover {
+	border-color: rgb(194, 182, 182);
+	background-color: rgb(194, 182, 182);
+}
+
+.userListInitial {
+	margin-top: 10px;
+
+	text-align: center;
+
+	font-size: 90%;
+}
+
+.userListTicker {
+	display: flex;
+	float: left;
+	overflow: hidden;
+	align-items: flex-start;
+
+	margin-top: 10px;
+}
+
+.userListName {
+	text-align: left;
+}
+
+.usercard {
+	border-radius: 5px;
+
+	background-color: #F4F5F7;
+}
+
+.usercardHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	padding: 10px;
+}
+
+.usercardHeaderUsername {
+	font-weight: 600;
+}
+
+.usercardInfo {
+	padding: 10px;
+}
+
+.usercardHeaderClose {
+	padding: 5px 8px;
+
+	border-radius: 50%;
+	background-color: rgb(226, 226, 226);
+}
+
+.usercardHeaderClose:hover {
+	cursor: pointer;
+
+	background-color: rgba(9, 30, 66, 0.205);
+}
+
+@media screen and (max-width: 1269px) {
+	.user {
+		top: 70px;
+		right: 150px;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.user {
+		top: 10px;
+		left: 220px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.user {
+		top: 10px;
+		left: 150px;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.user {
+		top: 10px;
+		left: 10px;
+	}
+}

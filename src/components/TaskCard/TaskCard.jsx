@@ -7,6 +7,7 @@ import { PortModal } from "../PortModal";
 import { DateCard } from "../DateCard";
 import { EventCard } from "components/EventCard/EventCard";
 import { LimitCard } from "components/LimitCard/LimitCard";
+import { UsersCard } from "components/UsersCard/UsersCard";
 
 export class TaskCard extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ export class TaskCard extends React.Component {
       valueDate: this.props.task.date || "",
       valueUsers: this.props.task.users || "",
       isActivePortModal: false,
+      isActiveUsersCard: false,
       component: {},
     };
   }
@@ -43,12 +45,6 @@ export class TaskCard extends React.Component {
   handleChangeDate = (e) => {
     this.setState({
       valueDate: e.target.value,
-      isActivePortModal: false,
-    });
-  };
-
-  handleClosePortModal = () => {
-    this.setState({
       isActivePortModal: false,
     });
   };
@@ -152,9 +148,32 @@ export class TaskCard extends React.Component {
     });
   };
 
+  handleClosePortModal = () => {
+    this.setState({
+      isActivePortModal: false,
+    });
+  };
+
+  handleClickUsers = () => {
+    this.setState({
+      isActiveUsersCard: true,
+    });
+  };
+
+  handleCancelUserCard = () => {
+    this.setState({
+      isActiveUsersCard: false,
+    });
+  };
+
+  onEditUsers = (user) => {
+    
+  };
+
   render() {
     const component = this.state.component;
     const isActivePortModal = this.state.isActivePortModal;
+    const isActiveUsersCard = this.state.isActiveUsersCard;
     return (
       <div className={css.wrapper}>
         <div className={css.card}>
@@ -236,7 +255,7 @@ export class TaskCard extends React.Component {
                     icon={"icn__btnuser"}
                     class={css.actionButton}
                     text={"Участники"}
-                    onClick={this.props.onClickUser}
+                    onClick={this.handleClickUsers}
                   />
                 </li>
                 <li>
@@ -281,6 +300,12 @@ export class TaskCard extends React.Component {
           </div>
         </div>
         {isActivePortModal && <PortModal>{component}</PortModal>}
+        {isActiveUsersCard && (
+          <UsersCard
+            onClickCancel={this.handleCancelUserCard}
+            onEditUsers={this.onEditUsers}
+          />
+        )}
       </div>
     );
   }
