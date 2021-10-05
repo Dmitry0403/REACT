@@ -5,8 +5,8 @@ export function UserCardInfo(props) {
   return (
     <div className={css.usercard}>
       <div className={css.usercardHeader}>
-        <div className={css.usercardHeaderUsername}></div>
-        <Button text="x" class={css.usercardHeaderClose} onClick={props.onClickCancel}/>
+        <div className={css.usercardHeaderUsername}>{props.user.name}</div>
+        <Button text="X" class={css.usercardHeaderClose} onClick={props.onClickCancel}/>
       </div>
       <div className={css.usercardInfo}>
         <div>{`nick: ${props.user.username}`}</div>

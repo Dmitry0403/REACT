@@ -4,12 +4,7 @@ import { User } from "./User";
 import { UserCardInfo } from "./UserCardInfo";
 import { Button } from "components/common/Button";
 import { PortModal } from "../PortModal/PortModal";
-
-async function GetDataFromServer() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users");
-  const data = await response.json();
-  return data;
-}
+import { Loader } from "../Loader/Loader";
 
 export class UsersCard extends React.Component {
   constructor(props) {
@@ -18,16 +13,26 @@ export class UsersCard extends React.Component {
       users: [],
       currentUser: {},
       isActivePortModal: false,
+      isLoader: false,
+      isError: false,
     };
   }
 
+  async GetDataFromServer() {
+    this.setState({ isLoader: true });
+    try {
+      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+      if (response.ok) {
+        const data = await response.json();
+        this.setState({ users: data, isLoader: false });
+      } else throw new Error("Ошибка");
+    } catch (err) {
+      this.setState({ isError: true, isLoader: false });
+    }
+  }
+
   componentDidMount() {
-    GetDataFromServer().then((data) => {
-      const users = data;
-      this.setState({
-        users,
-      });
-    });
+    this.GetDataFromServer();
   }
 
   handleClickUser = (user) => {
@@ -37,8 +42,15 @@ export class UsersCard extends React.Component {
     });
   };
 
+  handleCancelUserCardInfo = () => {
+    this.setState({
+      isActivePortModal: false,
+    });
+  };
+
   render() {
-    const { users, currentUser, isActivePortModal } = this.state;
+    const { users, currentUser, isActivePortModal, isLoader, isError } =
+      this.state;
     return (
       <div class={css.overlay}>
         <div className={css.user}>
@@ -52,19 +64,32 @@ export class UsersCard extends React.Component {
           </div>
           <div className={css.userListWrapper}>
             <div className={css.app}>
-              {users.map((user) => (
-                <User
-                  key={user.id}
-                  user={user}
-                  onClickUser={() => this.handleClickUser(user)}
-                />
-              ))}
+              {isLoader && <Loader />}
+              {isError && (
+                <div>
+                  Ошибка, данные невозможно получить
+                </div>
+              )}
+              {!isLoader && !isError && (
+                <div>
+                  {users.map((user) => (
+                    <User
+                      key={user.id}
+                      user={user}
+                      onClickUser={() => this.handleClickUser(user)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
         {isActivePortModal && (
           <PortModal>
-            <UserCardInfo user={currentUser} />
+            <UserCardInfo
+              user={currentUser}
+              onClickCancel={this.handleCancelUserCardInfo}
+            />
           </PortModal>
         )}
       </div>
