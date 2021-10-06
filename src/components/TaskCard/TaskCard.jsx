@@ -8,6 +8,7 @@ import { DateCard } from "../DateCard";
 import { EventCard } from "components/EventCard/EventCard";
 import { LimitCard } from "components/LimitCard/LimitCard";
 import { UsersCard } from "components/UsersCard/UsersCard";
+import { UserCardInfo } from "components/UsersCard/UserCardInfo";
 
 export class TaskCard extends React.Component {
   constructor(props) {
@@ -20,6 +21,8 @@ export class TaskCard extends React.Component {
       valueUsers: this.props.task.users || [],
       isActivePortModal: false,
       isActiveUsersCard: false,
+      isPortModal: false,
+      currentUser: {},
       component: {},
     };
   }
@@ -171,10 +174,27 @@ export class TaskCard extends React.Component {
     const newValueUsers = valueUsers.concat([{ user }]);
     this.setState({
       valueUsers: newValueUsers,
+    });
+  };
 
-      // const nextState = { valueUsers: prevState.valueUsers.push(user) };
+  handelCallUser = (user) => {
+    this.setState({
+      isPortModal: true,
+      currentUser: user,
+    });
+  };
+  handleDeleteUserCard = (user) => {
+    const users = this.state.valueUsers;
+    const newUsers = users.filter((item) => item.user.name !== user.name);
+    this.setState({
+      valueUsers: newUsers,
+      isPortModal: false,
+    });
+  };
 
-      // return nextState;
+  handleCancelUserCardInfo = () => {
+    this.setState({
+      isPortModal: false,
     });
   };
 
@@ -182,6 +202,8 @@ export class TaskCard extends React.Component {
     const component = this.state.component;
     const isActivePortModal = this.state.isActivePortModal;
     const isActiveUsersCard = this.state.isActiveUsersCard;
+    const isPortModal = this.state.isPortModal;
+    const currentUser = this.state.currentUser;
     const users = this.state.valueUsers;
     return (
       <div className={css.wrapper}>
@@ -203,7 +225,7 @@ export class TaskCard extends React.Component {
             </div>
             <div>
               <Button
-                class={css.headerRight}
+                classButton={css.headerRight}
                 text="X"
                 onClick={this.props.onCloseTaskCard}
               />
@@ -216,7 +238,11 @@ export class TaskCard extends React.Component {
                   <div className={css.infoUsersTitle}>УЧАСТНИКИ</div>
                   {users &&
                     users.map((item) => (
-                      <div key={item.user.id} className={css.infoUsersName}>
+                      <div
+                        key={item.user.id}
+                        className={css.infoUsersName}
+                        onClick={() => this.handelCallUser(item.user)}
+                      >
                         {item.user.name}
                       </div>
                     ))}
@@ -265,7 +291,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnuser"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Участники"}
                     onClick={this.handleClickUsers}
                   />
@@ -273,7 +299,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnaccess_time"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Дата"}
                     onClick={this.handleClickDate}
                   />
@@ -284,7 +310,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnarrow-right2"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Перемещение"}
                     onClick={this.onClickMoving}
                   />
@@ -292,7 +318,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnvideo_label"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Удаление"}
                     onClick={this.onClickRemoving}
                   />
@@ -302,7 +328,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnattachment"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Сохранить"}
                     onClick={this.handleClickSaving}
                   />
@@ -317,6 +343,16 @@ export class TaskCard extends React.Component {
             onClickUserCard={this.onEditUsers}
             onClickCancel={this.handleCancelUserCard}
           />
+        )}
+        {isPortModal && (
+          <PortModal>
+            <UserCardInfo
+              user={currentUser}
+              onClickCancel={this.handleCancelUserCardInfo}
+              onClickUserCard={() => this.handleDeleteUserCard(currentUser)}
+              text={"удалить с карточки"}
+            />
+          </PortModal>
         )}
       </div>
     );

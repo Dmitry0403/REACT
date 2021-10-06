@@ -8,7 +8,7 @@ export function UserCardInfo(props) {
         <div className={css.usercardHeaderUsername}>{props.user.name}</div>
         <Button
           text="X"
-          class={css.usercardHeaderClose}
+          classButton={css.usercardHeaderClose}
           onClick={props.onClickCancel}
         />
       </div>
@@ -18,8 +18,8 @@ export function UserCardInfo(props) {
         <div>{`web: ${props.user.website}`}</div>
       </div>
       <Button
-        text={"добавить на карточку"}
-        class={css.usercardButton}
+        text={props.text}
+        classButton={css.usercardButton}
         onClick={() => props.onClickUserCard(props.user)}
       />
     </div>

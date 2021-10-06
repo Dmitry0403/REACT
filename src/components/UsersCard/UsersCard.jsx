@@ -61,13 +61,13 @@ export class UsersCard extends React.Component {
     const { users, currentUser, isActivePortModal, isLoader, isError } =
       this.state;
     return (
-      <div class={css.overlay}>
+      <div className={css.overlay}>
         <div className={css.user}>
           <div className={css.userHeader}>
             <div className={css.userHeaderTitle}>Участники</div>
             <Button
               text={"X"}
-              class={css.userCancel}
+              classButton={css.userCancel}
               onClick={this.props.onClickCancel}
             />
           </div>
@@ -95,6 +95,7 @@ export class UsersCard extends React.Component {
               user={currentUser}
               onClickCancel={this.handleCancelUserCardInfo}
               onClickUserCard={this.handleClickUserCard}
+              text={"добавить на карточку"}
             />
           </PortModal>
         )}
