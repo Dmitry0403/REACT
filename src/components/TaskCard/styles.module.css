@@ -97,6 +97,7 @@
 
 .infoUsers {
   margin-right: 30px;
+  margin-bottom: 10px;
 }
 
 .infoUsersTitle,
@@ -112,6 +113,7 @@
 .infoUsersName {
   padding: 3px;
   width: fit-content;
+  border-radius: 3px;
 }
 
 .infoUsersName:hover {

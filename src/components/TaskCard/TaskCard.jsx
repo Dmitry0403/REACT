@@ -7,18 +7,23 @@ import { PortModal } from "../PortModal";
 import { DateCard } from "../DateCard";
 import { EventCard } from "components/EventCard/EventCard";
 import { LimitCard } from "components/LimitCard/LimitCard";
+import { UsersCard } from "components/UsersCard/UsersCard";
+import { UserCardInfo } from "components/UsersCard/UserCardInfo";
 
 export class TaskCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isActivePortModal: false,
+      isActiveUsersCard: false,
+      isPortModal: false,
+      currentUser: {},
+      component: {},
+      valueUsers: this.props.task.users || [],
       valueTitle: this.props.task.title,
       valueDescription: this.props.task.description || "",
       valueComment: this.props.task.comment || "",
       valueDate: this.props.task.date || "",
-      valueUsers: this.props.task.users || "",
-      isActivePortModal: false,
-      component: {},
     };
   }
 
@@ -43,12 +48,6 @@ export class TaskCard extends React.Component {
   handleChangeDate = (e) => {
     this.setState({
       valueDate: e.target.value,
-      isActivePortModal: false,
-    });
-  };
-
-  handleClosePortModal = () => {
-    this.setState({
       isActivePortModal: false,
     });
   };
@@ -152,9 +151,74 @@ export class TaskCard extends React.Component {
     });
   };
 
+  handleClosePortModal = () => {
+    this.setState({
+      isActivePortModal: false,
+    });
+  };
+
+  handleClickUsers = () => {
+    this.setState({
+      isActiveUsersCard: true,
+    });
+  };
+
+  handleCancelUserCard = () => {
+    this.setState({
+      isActiveUsersCard: false,
+    });
+  };
+
+  onEditUsers = (user) => {
+    const valueUsers = this.state.valueUsers;
+    let isRepeat = false;
+    valueUsers.forEach((item) => {
+      if (item.user.id === user.id) {
+        isRepeat = true;
+      }
+    });
+    if (isRepeat) {
+      return;
+    } else {
+      const newValueUsers = valueUsers.concat([{ user }]);
+      this.setState({
+        valueUsers: newValueUsers,
+      });
+    }
+  };
+
+  handelCallUser = (user) => {
+    this.setState({
+      isPortModal: true,
+      currentUser: user,
+    });
+  };
+
+  handleDeleteUserCard = (user) => {
+    const users = this.state.valueUsers;
+    const newUsers = users.filter((item) => item.user.name !== user.name);
+    this.setState({
+      valueUsers: newUsers,
+      isPortModal: false,
+    });
+  };
+
+  handleCancelUserCardInfo = () => {
+    this.setState({
+      isPortModal: false,
+    });
+  };
+
   render() {
-    const component = this.state.component;
-    const isActivePortModal = this.state.isActivePortModal;
+    const {
+      isActivePortModal,
+      isActiveUsersCard,
+      isPortModal,
+      currentUser,
+      component,
+      valueUsers,
+    } = this.state;
+
     return (
       <div className={css.wrapper}>
         <div className={css.card}>
@@ -175,7 +239,7 @@ export class TaskCard extends React.Component {
             </div>
             <div>
               <Button
-                class={css.headerRight}
+                classButton={css.headerRight}
                 text="X"
                 onClick={this.props.onCloseTaskCard}
               />
@@ -186,9 +250,16 @@ export class TaskCard extends React.Component {
               <div className={css.info}>
                 <div className={css.infoUsers}>
                   <div className={css.infoUsersTitle}>УЧАСТНИКИ</div>
-                  <div className={css.infoUsersName}>
-                    {this.state.valueUsers}
-                  </div>
+                  {valueUsers &&
+                    valueUsers.map((item) => (
+                      <div
+                        key={item.user.id}
+                        className={css.infoUsersName}
+                        onClick={() => this.handelCallUser(item.user)}
+                      >
+                        {item.user.name}
+                      </div>
+                    ))}
                 </div>
                 <div className={css.infoTerm}>
                   <div className={css.infoTermTitle}>СРОК</div>
@@ -234,15 +305,15 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnuser"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Участники"}
-                    onClick={this.props.onClickUser}
+                    onClick={this.handleClickUsers}
                   />
                 </li>
                 <li>
                   <Button
                     icon={"icn__btnaccess_time"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Дата"}
                     onClick={this.handleClickDate}
                   />
@@ -253,7 +324,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnarrow-right2"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Перемещение"}
                     onClick={this.onClickMoving}
                   />
@@ -261,7 +332,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnvideo_label"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Удаление"}
                     onClick={this.onClickRemoving}
                   />
@@ -271,7 +342,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnattachment"}
-                    class={css.actionButton}
+                    classButton={css.actionButton}
                     text={"Сохранить"}
                     onClick={this.handleClickSaving}
                   />
@@ -281,6 +352,22 @@ export class TaskCard extends React.Component {
           </div>
         </div>
         {isActivePortModal && <PortModal>{component}</PortModal>}
+        {isActiveUsersCard && (
+          <UsersCard
+            onClickUserCard={this.onEditUsers}
+            onClickCancel={this.handleCancelUserCard}
+          />
+        )}
+        {isPortModal && (
+          <PortModal>
+            <UserCardInfo
+              user={currentUser}
+              onClickCancel={this.handleCancelUserCardInfo}
+              onClickUserCard={() => this.handleDeleteUserCard(currentUser)}
+              text={"удалить с карточки"}
+            />
+          </PortModal>
+        )}
       </div>
     );
   }

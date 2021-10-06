@@ -26,11 +26,9 @@ export class App extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     const tasksArray = this.state.tasksArray;
-    if (tasksArray !== prevProps.tasksArray) {
-      localStorage.setItem("tasksArray", JSON.stringify(tasksArray));
-    }
+    localStorage.setItem("tasksArray", JSON.stringify(tasksArray));
   }
 
   handleEditEnd = (value) => {
