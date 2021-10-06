@@ -4,7 +4,8 @@ export function Input(props) {
   return (
     <input
       type={props.type}
-      className={css.input + " " + props.class}
+      name={props.name}
+      className={css.input + " " + props.classInput}
       onChange={props.onChange}
       onBlur={props.onBlur}
       placeholder={props.placeholder}

@@ -225,7 +225,7 @@ export class TaskCard extends React.Component {
           <div className={css.header}>
             <div className={css.headerLeft}>
               <Input
-                class={css.headerTitle}
+                classInput={css.headerTitle}
                 onChange={this.handleChangeTitle}
                 value={this.state.valueTitle}
               />
@@ -278,7 +278,7 @@ export class TaskCard extends React.Component {
                 </div>
                 <div className={css.infoDescriptionText}>
                   <Input
-                    class={css.infoDescriptionInput}
+                    classInput={css.infoDescriptionInput}
                     placeholder={"Введите описание задачи!"}
                     onChange={this.handleChangeDescription}
                     value={this.state.valueDescription}
@@ -291,7 +291,7 @@ export class TaskCard extends React.Component {
                 </div>
                 <div className={css.infoCommentText}>
                   <Input
-                    class={css.infoCommentInput}
+                    classInput={css.infoCommentInput}
                     placeholder={"Напишите комментарий..."}
                     onChange={this.handleChangeComment}
                     value={this.state.valueComment}
