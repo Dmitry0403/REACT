@@ -171,10 +171,20 @@ export class TaskCard extends React.Component {
 
   onEditUsers = (user) => {
     const valueUsers = this.state.valueUsers;
-    const newValueUsers = valueUsers.concat([{ user }]);
-    this.setState({
-      valueUsers: newValueUsers,
+    let isRepeat = false;
+    valueUsers.forEach((item) => {
+      if (item.user.id === user.id) {
+        isRepeat = true;
+      }
     });
+    if (isRepeat) {
+      return;
+    } else {
+      const newValueUsers = valueUsers.concat([{ user }]);
+      this.setState({
+        valueUsers: newValueUsers,
+      });
+    }
   };
 
   handelCallUser = (user) => {
@@ -183,6 +193,7 @@ export class TaskCard extends React.Component {
       currentUser: user,
     });
   };
+
   handleDeleteUserCard = (user) => {
     const users = this.state.valueUsers;
     const newUsers = users.filter((item) => item.user.name !== user.name);
