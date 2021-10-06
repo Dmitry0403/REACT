@@ -17,7 +17,7 @@ export class TaskCard extends React.Component {
       valueDescription: this.props.task.description || "",
       valueComment: this.props.task.comment || "",
       valueDate: this.props.task.date || "",
-      valueUsers: this.props.task.users || "",
+      valueUsers: this.props.task.users || [],
       isActivePortModal: false,
       isActiveUsersCard: false,
       component: {},
@@ -167,13 +167,22 @@ export class TaskCard extends React.Component {
   };
 
   onEditUsers = (user) => {
-    
+    const valueUsers = this.state.valueUsers;
+    const newValueUsers = valueUsers.concat([{ user }]);
+    this.setState({
+      valueUsers: newValueUsers,
+
+      // const nextState = { valueUsers: prevState.valueUsers.push(user) };
+
+      // return nextState;
+    });
   };
 
   render() {
     const component = this.state.component;
     const isActivePortModal = this.state.isActivePortModal;
     const isActiveUsersCard = this.state.isActiveUsersCard;
+    const users = this.state.valueUsers;
     return (
       <div className={css.wrapper}>
         <div className={css.card}>
@@ -205,9 +214,12 @@ export class TaskCard extends React.Component {
               <div className={css.info}>
                 <div className={css.infoUsers}>
                   <div className={css.infoUsersTitle}>УЧАСТНИКИ</div>
-                  <div className={css.infoUsersName}>
-                    {this.state.valueUsers}
-                  </div>
+                  {users &&
+                    users.map((item) => (
+                      <div key={item.user.id} className={css.infoUsersName}>
+                        {item.user.name}
+                      </div>
+                    ))}
                 </div>
                 <div className={css.infoTerm}>
                   <div className={css.infoTermTitle}>СРОК</div>
@@ -302,8 +314,8 @@ export class TaskCard extends React.Component {
         {isActivePortModal && <PortModal>{component}</PortModal>}
         {isActiveUsersCard && (
           <UsersCard
+            onClickUserCard={this.onEditUsers}
             onClickCancel={this.handleCancelUserCard}
-            onEditUsers={this.onEditUsers}
           />
         )}
       </div>

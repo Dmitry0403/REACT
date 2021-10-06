@@ -21,7 +21,9 @@ export class UsersCard extends React.Component {
   async GetDataFromServer() {
     this.setState({ isLoader: true });
     try {
-      const response = await fetch("https://jsonplaceholder.typicode.com/users");
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
       if (response.ok) {
         const data = await response.json();
         this.setState({ users: data, isLoader: false });
@@ -48,6 +50,13 @@ export class UsersCard extends React.Component {
     });
   };
 
+  handleClickUserCard = (user) => {
+    this.props.onClickUserCard(user);
+    this.setState({
+      isActivePortModal: false,
+    });
+  };
+
   render() {
     const { users, currentUser, isActivePortModal, isLoader, isError } =
       this.state;
@@ -65,11 +74,7 @@ export class UsersCard extends React.Component {
           <div className={css.userListWrapper}>
             <div className={css.app}>
               {isLoader && <Loader />}
-              {isError && (
-                <div>
-                  Ошибка, данные невозможно получить
-                </div>
-              )}
+              {isError && <div>Ошибка, данные невозможно получить</div>}
               {!isLoader && !isError && (
                 <div>
                   {users.map((user) => (
@@ -89,6 +94,7 @@ export class UsersCard extends React.Component {
             <UserCardInfo
               user={currentUser}
               onClickCancel={this.handleCancelUserCardInfo}
+              onClickUserCard={this.handleClickUserCard}
             />
           </PortModal>
         )}
