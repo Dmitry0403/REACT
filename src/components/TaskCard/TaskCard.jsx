@@ -14,16 +14,16 @@ export class TaskCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      valueTitle: this.props.task.title,
-      valueDescription: this.props.task.description || "",
-      valueComment: this.props.task.comment || "",
-      valueDate: this.props.task.date || "",
-      valueUsers: this.props.task.users || [],
       isActivePortModal: false,
       isActiveUsersCard: false,
       isPortModal: false,
       currentUser: {},
       component: {},
+      valueUsers: this.props.task.users || [],
+      valueTitle: this.props.task.title,
+      valueDescription: this.props.task.description || "",
+      valueComment: this.props.task.comment || "",
+      valueDate: this.props.task.date || "",
     };
   }
 
@@ -199,12 +199,15 @@ export class TaskCard extends React.Component {
   };
 
   render() {
-    const component = this.state.component;
-    const isActivePortModal = this.state.isActivePortModal;
-    const isActiveUsersCard = this.state.isActiveUsersCard;
-    const isPortModal = this.state.isPortModal;
-    const currentUser = this.state.currentUser;
-    const users = this.state.valueUsers;
+    const {
+      isActivePortModal,
+      isActiveUsersCard,
+      isPortModal,
+      currentUser,
+      component,
+      valueUsers,
+    } = this.state;
+
     return (
       <div className={css.wrapper}>
         <div className={css.card}>
@@ -236,8 +239,8 @@ export class TaskCard extends React.Component {
               <div className={css.info}>
                 <div className={css.infoUsers}>
                   <div className={css.infoUsersTitle}>УЧАСТНИКИ</div>
-                  {users &&
-                    users.map((item) => (
+                  {valueUsers &&
+                    valueUsers.map((item) => (
                       <div
                         key={item.user.id}
                         className={css.infoUsersName}
