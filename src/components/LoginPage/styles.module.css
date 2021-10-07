@@ -16,15 +16,13 @@ label {
 .userForm {
   text-align: center;
 }
-.userName {
+
+.userName, .userPass {
   font-size: 25px;
   max-width: 380px;
+  margin-bottom: 40px;
 }
 
-.userPass {
-  font-size: 25px;
-  max-width: 380px;
-}
 
 .button {
   min-width: 200px;
