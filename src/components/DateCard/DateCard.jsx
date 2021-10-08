@@ -9,11 +9,20 @@ export function DateCard(props) {
         <div className={css.cardHeader}>
           <div className={css.cardHeaderName}>Дата</div>
           <div>
-            <Button class={css.cardHeaderClose} text="X" onClick={props.onClickClosePortModal}/>
+            <Button
+              class={css.cardHeaderClose}
+              text="X"
+              onClick={props.onClickClosePortModal}
+            />
           </div>
         </div>
         <div>
-          <Input class={css.cardInput} type="date" value={props.value} onChange={props.onChangeDate}/>
+          <Input
+            classInput={css.cardInput}
+            type="date"
+            value={props.value}
+            onChange={props.onChangeDate}
+          />
         </div>
       </div>
     </div>

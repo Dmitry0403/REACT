@@ -1,6 +1,6 @@
 import "./styles.css"
 
-export function Header(){
+export function Header(props){
     return(
         <header className="header">
         <div className="logo">
@@ -9,7 +9,7 @@ export function Header(){
             <span>Trello</span>
           </a>
         </div>
-        <div className="icon-menu">menu</div>
+        <div className="icon-menu" onClick={props.onClick}>menu</div>
       </header>
     )
 }
