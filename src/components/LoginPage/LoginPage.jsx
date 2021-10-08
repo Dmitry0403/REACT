@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./styles.module.css";
-import { Input } from "components/common/Input";
+import { Input } from "components/common";
 
 export class LoginPage extends React.Component {
   constructor(props) {
@@ -25,10 +25,9 @@ export class LoginPage extends React.Component {
     const {
       values: { login, password },
     } = this.state;
-
+    e.preventDefault();
     if (login === userLogin && password === userPass) {
-      this.props.onComeInTrello();
-      e.preventDefault();
+      this.props.onComeToTrello();
       return;
     }
     if (login !== userLogin) {
@@ -42,7 +41,6 @@ export class LoginPage extends React.Component {
         errors: { ...prevState.errors, password: "ошибка" },
       }));
     }
-    e.preventDefault();
   };
 
   render() {
@@ -57,31 +55,31 @@ export class LoginPage extends React.Component {
         <form className={css.userForm} onSubmit={this.handleSubmit}>
           <div>
             <label>Ваш логин:</label>
-            <p>
+            <div>
               <Input
                 type="text"
                 value={login}
                 name="login"
-                classInput={css.userName}
+                className={css.userName}
                 onChange={this.handleChange}
                 errorMessage={errorLogin}
                 errorText={"неверный логин"}
               />
-            </p>
+            </div>
           </div>
           <div>
             <label>Ваш пароль:</label>
-            <p>
+            <div>
               <Input
                 type="password"
                 value={password}
                 name="password"
-                classInput={css.userPass}
+                className={css.userPass}
                 onChange={this.handleChange}
                 errorMessage={errorPass}
                 errorText={"неверный пароль"}
               />
-            </p>
+            </div>
           </div>
           <div>
             <button type="submit" name="submit" className={css.button}>

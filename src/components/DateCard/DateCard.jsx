@@ -1,6 +1,6 @@
 import css from "./styles.module.css";
-import { Input } from "components/common/Input";
-import { Button } from "components/common/Button";
+import { Input } from "components/common";
+import { Button } from "components/common";
 
 export function DateCard(props) {
   return (
@@ -10,7 +10,7 @@ export function DateCard(props) {
           <div className={css.cardHeaderName}>Дата</div>
           <div>
             <Button
-              class={css.cardHeaderClose}
+              className={css.cardHeaderClose}
               text="X"
               onClick={props.onClickClosePortModal}
             />
@@ -18,7 +18,7 @@ export function DateCard(props) {
         </div>
         <div>
           <Input
-            classInput={css.cardInput}
+            className={css.cardInput}
             type="date"
             value={props.value}
             onChange={props.onChangeDate}

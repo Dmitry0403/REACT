@@ -3,10 +3,12 @@ import "./styles.css";
 import { Card } from "../Card";
 import { EditableCard } from "components/EditableCard/EditableCard";
 import { TASK_STATUSES } from "components/App";
+import { ErrorBoundary } from "components/ErrorBoundary/ErrorBoundary";
 
 export function TasksBoard(props) {
   const tasksArray = props.tasksArray;
   return (
+  <ErrorBoundary>  
     <div className="main wrapper">
       <div className="container-global">
         <div className="container-cards">
@@ -30,5 +32,6 @@ export function TasksBoard(props) {
         </div>
       </div>
     </div>
+  </ErrorBoundary>  
   );
 }

@@ -1,5 +1,5 @@
 import css from "./styles.module.css";
-import { Button } from "components/common/Button";
+import { Button } from "components/common";
 
 export function EventCard(props) {
   return (

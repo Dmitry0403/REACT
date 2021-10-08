@@ -1,5 +1,5 @@
 import css from "./styles.module.css";
-import { Button } from "components/common/Button";
+import { Button } from "components/common";
 
 export function UserCardInfo(props) {
   return (
@@ -8,7 +8,7 @@ export function UserCardInfo(props) {
         <div className={css.usercardHeaderUsername}>{props.user.name}</div>
         <Button
           text="X"
-          classButton={css.usercardHeaderClose}
+          className={css.usercardHeaderClose}
           onClick={props.onClickCancel}
         />
       </div>
@@ -19,7 +19,7 @@ export function UserCardInfo(props) {
       </div>
       <Button
         text={props.text}
-        classButton={css.usercardButton}
+        className={css.usercardButton}
         onClick={() => props.onClickUserCard(props.user)}
       />
     </div>

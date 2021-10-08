@@ -1,5 +1,5 @@
 import css from "./styles.module.css";
-import { Button } from "components/common/Button";
+import { Button } from "components/common";
 
 export function LimitCard(props) {
   return (
@@ -11,7 +11,7 @@ export function LimitCard(props) {
       <div className={css.limitCardFooter}>
         <Button
           text="OK"
-          class={css.limitCardFooterButton}
+          className={css.limitCardFooterButton}
           onClick={props.onClickCancel}
         />
       </div>
