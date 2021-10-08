@@ -11,7 +11,8 @@
   overflow-wrap: break-word;
 }
 
-.errorMessage{
+
+.error{
   font-size: 20px;
   max-width: 250px;
   border: red 3px solid;

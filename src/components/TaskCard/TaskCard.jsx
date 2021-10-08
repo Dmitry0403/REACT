@@ -1,8 +1,8 @@
 import React from "react";
 import css from "./styles.module.css";
 import { TASK_STATUSES } from "../App";
-import { Input } from "components/common/Input";
-import { Button } from "components/common/Button";
+import { Input } from "components/common";
+import { Button } from "components/common";
 import { PortModal } from "../PortModal";
 import { DateCard } from "../DateCard";
 import { EventCard } from "components/EventCard/EventCard";
@@ -225,7 +225,7 @@ export class TaskCard extends React.Component {
           <div className={css.header}>
             <div className={css.headerLeft}>
               <Input
-                classInput={css.headerTitle}
+                className={css.headerTitle}
                 onChange={this.handleChangeTitle}
                 value={this.state.valueTitle}
               />
@@ -239,7 +239,7 @@ export class TaskCard extends React.Component {
             </div>
             <div>
               <Button
-                classButton={css.headerRight}
+                className={css.headerRight}
                 text="X"
                 onClick={this.props.onCloseTaskCard}
               />
@@ -278,7 +278,7 @@ export class TaskCard extends React.Component {
                 </div>
                 <div className={css.infoDescriptionText}>
                   <Input
-                    classInput={css.infoDescriptionInput}
+                    className={css.infoDescriptionInput}
                     placeholder={"Введите описание задачи!"}
                     onChange={this.handleChangeDescription}
                     value={this.state.valueDescription}
@@ -291,7 +291,7 @@ export class TaskCard extends React.Component {
                 </div>
                 <div className={css.infoCommentText}>
                   <Input
-                    classInput={css.infoCommentInput}
+                    className={css.infoCommentInput}
                     placeholder={"Напишите комментарий..."}
                     onChange={this.handleChangeComment}
                     value={this.state.valueComment}
@@ -305,7 +305,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnuser"}
-                    classButton={css.actionButton}
+                    className={css.actionButton}
                     text={"Участники"}
                     onClick={this.handleClickUsers}
                   />
@@ -313,7 +313,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnaccess_time"}
-                    classButton={css.actionButton}
+                    className={css.actionButton}
                     text={"Дата"}
                     onClick={this.handleClickDate}
                   />
@@ -324,7 +324,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnarrow-right2"}
-                    classButton={css.actionButton}
+                    className={css.actionButton}
                     text={"Перемещение"}
                     onClick={this.onClickMoving}
                   />
@@ -332,7 +332,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnvideo_label"}
-                    classButton={css.actionButton}
+                    className={css.actionButton}
                     text={"Удаление"}
                     onClick={this.onClickRemoving}
                   />
@@ -342,7 +342,7 @@ export class TaskCard extends React.Component {
                 <li>
                   <Button
                     icon={"icn__btnattachment"}
-                    classButton={css.actionButton}
+                    className={css.actionButton}
                     text={"Сохранить"}
                     onClick={this.handleClickSaving}
                   />

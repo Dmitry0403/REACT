@@ -2,7 +2,7 @@ import React from "react";
 import css from "./styles.module.css";
 import { User } from "./User";
 import { UserCardInfo } from "./UserCardInfo";
-import { Button } from "components/common/Button";
+import { Button } from "components/common";
 import { PortModal } from "../PortModal/PortModal";
 import { Loader } from "../Loader/Loader";
 
@@ -67,7 +67,7 @@ export class UsersCard extends React.Component {
             <div className={css.userHeaderTitle}>Участники</div>
             <Button
               text={"X"}
-              classButton={css.userCancel}
+              className={css.userCancel}
               onClick={this.props.onClickCancel}
             />
           </div>

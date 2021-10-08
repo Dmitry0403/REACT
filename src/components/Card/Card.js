@@ -1,6 +1,6 @@
 import "./styles.css";
-import { Button } from "../common/Button";
-import { Input } from "../common/Input";
+import { Button } from "../common";
+import { Input } from "../common";
 import { Tasks } from "../Task";
 
 export function Card(props) {

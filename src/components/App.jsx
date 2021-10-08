@@ -26,9 +26,11 @@ export class App extends React.Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(_, prevState) {
     const tasksArray = this.state.tasksArray;
-    localStorage.setItem("tasksArray", JSON.stringify(tasksArray));
+    if(this.state.tasksArray !== prevState.tasksArray){
+      localStorage.setItem("tasksArray", JSON.stringify(tasksArray));
+    }
   }
 
   handleEditEnd = (value) => {
@@ -44,7 +46,7 @@ export class App extends React.Component {
 
   handleEdit = (obj) => {
     const tasksArray = this.state.tasksArray;
-    tasksArray.map((task) => {
+    const newTasksArray = tasksArray.map((task) => {
       if (task.id === obj.id) {
         task.title = obj.title;
         task.description = obj.description;
@@ -55,7 +57,7 @@ export class App extends React.Component {
       return task;
     });
     this.setState({
-      tasksArray,
+      tasksArray: newTasksArray,
       isActiveTaskCard: false,
     });
   };
