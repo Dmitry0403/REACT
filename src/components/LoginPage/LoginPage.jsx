@@ -19,6 +19,7 @@ export class LoginPage extends React.Component {
     }));
   };
 
+ 
   handleSubmit = (e) => {
     const userLogin = process.env.REACT_APP_USER_LOGIN;
     const userPass = process.env.REACT_APP_USER_PASSWORD;
@@ -33,12 +34,14 @@ export class LoginPage extends React.Component {
     if (login !== userLogin) {
       this.setState((prevState) => ({
         errors: { ...prevState.errors, login: "ошибка" },
+        values: { ...prevState.values, login: "" },
       }));
     }
 
     if (password !== userPass) {
       this.setState((prevState) => ({
         errors: { ...prevState.errors, password: "ошибка" },
+        values: { ...prevState.values, password: "" },
       }));
     }
   };
@@ -71,7 +74,7 @@ export class LoginPage extends React.Component {
             <label>Ваш пароль:</label>
             <div>
               <Input
-                type="password"
+                type="text"
                 value={password}
                 name="password"
                 className={css.userPass}
