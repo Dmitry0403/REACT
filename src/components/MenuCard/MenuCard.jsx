@@ -1,20 +1,31 @@
-import css from "./styles.module.css"
+import css from "./styles.module.css";
+import { Button } from "components/common";
 
 export function MenuCard(props) {
+  const listMenu = ["todo", "in_progress", "done", "all"];
   return (
-    <div className={wrapperMenu}>
-      <div className={menu}>
-        <div className={menuHeader}>
-          <div className={menuHeaderTittle}>Очистить список</div>
-          <div className={menuHeaderClose}></div>
+    <div className={css.wrapper}>
+      <div className={css.menu}>
+        <div className={css.header}>
+          <div className={css.headerTittle}>Очистить список</div>
+          <Button
+            onClick={props.onClick}
+            className={css.headerClose}
+            text={"X"}
+          />
         </div>
-
-        <ul className={menuList}>
-          <li className="menu_list clrtodo"></li>
-          <li className="menu_list clrinprcs"></li>
-          <li className="menu_list clrdone"></li>
-          <li className="menu_list clrall"></li>
-        </ul>
+        <div className={css.menuList} onClick={props.onClickMenu}>
+          {listMenu.map((item) => (
+            <div key={item}>
+              <Button text={item} className={css.menuList} data={item} />
+            </div>
+          ))}
+          <Button
+            text={"выход с аккаунта"}
+            className={css.menuList}
+            onClick={props.onClickExit}
+          />
+        </div>
       </div>
     </div>
   );

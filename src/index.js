@@ -32,7 +32,8 @@ class GlodalComponent extends React.Component {
             )}
           </Route>
           <Route path="/trello">
-            {isLogin ? <App /> : <Redirect to="/login" />}
+            {/* {isLogin ? <App /> : <Redirect to="./login" />} */}
+            <App/>
           </Route>
           <Redirect to="/login" />
         </Switch>

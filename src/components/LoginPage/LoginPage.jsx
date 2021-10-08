@@ -19,7 +19,6 @@ export class LoginPage extends React.Component {
     }));
   };
 
- 
   handleSubmit = (e) => {
     const userLogin = process.env.REACT_APP_USER_LOGIN;
     const userPass = process.env.REACT_APP_USER_PASSWORD;
@@ -74,7 +73,7 @@ export class LoginPage extends React.Component {
             <label>Ваш пароль:</label>
             <div>
               <Input
-                type="text"
+                type="password"
                 value={password}
                 name="password"
                 className={css.userPass}

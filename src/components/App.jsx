@@ -3,6 +3,9 @@ import "../styles/styles.css";
 import { Header } from "./Header";
 import { TasksBoard } from "./TasksBoard";
 import { TaskCard } from "./TaskCard";
+import { MenuCard } from "./MenuCard/MenuCard";
+import { PortModal } from "./PortModal/PortModal";
+import { EventCard } from "./EventCard/EventCard";
 
 export const TASK_STATUSES = {
   todo: "todo",
@@ -13,8 +16,11 @@ export const TASK_STATUSES = {
 export class App extends React.Component {
   state = {
     isActiveTaskCard: false,
+    isActiveMenuCard: false,
+    isActivePortModal: false,
     tasksArray: [],
     activeTask: {},
+    nameList: "",
   };
 
   componentDidMount() {
@@ -28,7 +34,7 @@ export class App extends React.Component {
 
   componentDidUpdate(_, prevState) {
     const tasksArray = this.state.tasksArray;
-    if(this.state.tasksArray !== prevState.tasksArray){
+    if (this.state.tasksArray !== prevState.tasksArray) {
       localStorage.setItem("tasksArray", JSON.stringify(tasksArray));
     }
   }
@@ -100,11 +106,53 @@ export class App extends React.Component {
     });
   };
 
+  handleToggleMenuCard = () => {
+    const { isActiveMenuCard } = this.state;
+    this.setState({
+      isActiveMenuCard: !isActiveMenuCard,
+    });
+  };
+
+  handleClickItemMenu = ({ target }) => {
+    if (target.dataset.name) {
+      this.setState({
+        isActivePortModal: true,
+        nameList: target.dataset.name,
+      });
+    }
+  };
+
+  handelClearList = (nameList) => {
+    const { tasksArray } = this.state;
+    let newTasksArray = [];
+    if (nameList !== "all") {
+      newTasksArray = tasksArray.filter((item) => item.position !== nameList);
+    }
+    this.setState({
+      tasksArray: newTasksArray,
+      isActivePortModal: false,
+      isActiveMenuCard: false,
+    });
+  };
+
+  handleCloseModalCard = () => {
+    this.setState({
+      isActivePortModal: false,
+    });
+  };
+
   render() {
-    const { isActiveTaskCard, tasksArray, activeTask } = this.state;
+    const {
+      isActiveTaskCard,
+      isActiveMenuCard,
+      isActivePortModal,
+      tasksArray,
+      activeTask,
+      nameList,
+    } = this.state;
     return (
       <div>
-        <Header />
+        <Header onClick={this.handleToggleMenuCard} />
         <TasksBoard
           tasksArray={tasksArray}
           onEditEnd={this.handleEditEnd}
@@ -119,6 +167,22 @@ export class App extends React.Component {
             onEditMoving={this.handleEditMoving}
             onEditRemoving={this.handleEditRemoving}
           />
+        )}
+        {isActiveMenuCard && (
+          <MenuCard
+            onClick={this.handleToggleMenuCard}
+            onClickMenu={this.handleClickItemMenu}
+          />
+        )}
+        {isActivePortModal && (
+          <PortModal>
+            <EventCard
+              title="удаление списка"
+              text={`очистить список ${nameList}?`}
+              onClick={() => this.handelClearList(nameList)}
+              onClickCancel={this.handleCloseModalCard}
+            />
+          </PortModal>
         )}
       </div>
     );
