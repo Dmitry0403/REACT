@@ -13,9 +13,11 @@ class GlodalComponent extends React.Component {
   state = {
     isLogin: false,
   };
+
   handleComeToTrello = () => {
+    const isLogin = this.state.isLogin;
     this.setState({
-      isLogin: true,
+      isLogin: !isLogin,
     });
   };
 
@@ -32,8 +34,11 @@ class GlodalComponent extends React.Component {
             )}
           </Route>
           <Route path="/trello">
-            {/* {isLogin ? <App /> : <Redirect to="./login" />} */}
-            <App/>
+            {isLogin ? (
+              <App onExitAccount={this.handleComeToTrello} />
+            ) : (
+              <Redirect to="./login" />
+            )}
           </Route>
           <Redirect to="/login" />
         </Switch>

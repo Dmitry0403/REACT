@@ -20,7 +20,7 @@ export class App extends React.Component {
     isActivePortModal: false,
     tasksArray: [],
     activeTask: {},
-    nameList: "",
+    menuItems: { title: "", text: "", nameList: "" },
   };
 
   componentDidMount() {
@@ -114,25 +114,51 @@ export class App extends React.Component {
   };
 
   handleClickItemMenu = ({ target }) => {
-    if (target.dataset.name) {
-      this.setState({
-        isActivePortModal: true,
-        nameList: target.dataset.name,
-      });
+    const name = target.dataset.name;
+    if (name) {
+      switch (name) {
+        case "выход из аккаунта":
+          this.setState({
+            isActivePortModal: true,
+            menuItems: {
+              title: "Выход из аккаунта",
+              text: "действительно выходим?",
+              nameList: name,
+            },
+          });
+          break;
+        default:
+          this.setState({
+            isActivePortModal: true,
+            menuItems: {
+              title: "Удаление списка",
+              text: `очистить список ${name}?`,
+              nameList: name,
+            },
+          });
+      }
     }
   };
 
-  handelClearList = (nameList) => {
+  handelPerformMenu = (nameList) => {
     const { tasksArray } = this.state;
     let newTasksArray = [];
-    if (nameList !== "all") {
-      newTasksArray = tasksArray.filter((item) => item.position !== nameList);
+    switch (nameList) {
+      case "выход из аккаунта":
+        this.props.onExitAccount();
+        break;
+      default:
+        if (nameList !== "all") {
+          newTasksArray = tasksArray.filter(
+            (item) => item.position !== nameList
+          );
+        }
+        this.setState({
+          tasksArray: newTasksArray,
+          isActivePortModal: false,
+          isActiveMenuCard: false,
+        });
     }
-    this.setState({
-      tasksArray: newTasksArray,
-      isActivePortModal: false,
-      isActiveMenuCard: false,
-    });
   };
 
   handleCloseModalCard = () => {
@@ -148,7 +174,7 @@ export class App extends React.Component {
       isActivePortModal,
       tasksArray,
       activeTask,
-      nameList,
+      menuItems: { title, text, nameList },
     } = this.state;
     return (
       <div>
@@ -177,9 +203,9 @@ export class App extends React.Component {
         {isActivePortModal && (
           <PortModal>
             <EventCard
-              title="удаление списка"
-              text={`очистить список ${nameList}?`}
-              onClick={() => this.handelClearList(nameList)}
+              title={title}
+              text={text}
+              onClick={() => this.handelPerformMenu(nameList)}
               onClickCancel={this.handleCloseModalCard}
             />
           </PortModal>

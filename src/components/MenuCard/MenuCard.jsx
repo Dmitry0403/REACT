@@ -2,7 +2,7 @@ import css from "./styles.module.css";
 import { Button } from "components/common";
 
 export function MenuCard(props) {
-  const listMenu = ["todo", "in_progress", "done", "all"];
+  const listMenu = ["todo", "in_progress", "done", "all", "выход из аккаунта"];
   return (
     <div className={css.wrapper}>
       <div className={css.menu}>
@@ -20,11 +20,6 @@ export function MenuCard(props) {
               <Button text={item} className={css.menuList} data={item} />
             </div>
           ))}
-          <Button
-            text={"выход с аккаунта"}
-            className={css.menuList}
-            onClick={props.onClickExit}
-          />
         </div>
       </div>
     </div>
