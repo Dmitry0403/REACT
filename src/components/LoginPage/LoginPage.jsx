@@ -32,13 +32,15 @@ export class LoginPage extends React.Component {
     }
     if (login !== userLogin) {
       this.setState((prevState) => ({
-        errors: { ...prevState.errors, login: "ошибка" },
+        errors: { ...prevState.errors, login: "неверный логин" },
+        values: { ...prevState.values, login: "" },
       }));
     }
 
     if (password !== userPass) {
       this.setState((prevState) => ({
-        errors: { ...prevState.errors, password: "ошибка" },
+        errors: { ...prevState.errors, password: "неверный пароль" },
+        values: { ...prevState.values, password: "" },
       }));
     }
   };
@@ -63,7 +65,6 @@ export class LoginPage extends React.Component {
                 className={css.userName}
                 onChange={this.handleChange}
                 errorMessage={errorLogin}
-                errorText={"неверный логин"}
               />
             </div>
           </div>
@@ -77,7 +78,6 @@ export class LoginPage extends React.Component {
                 className={css.userPass}
                 onChange={this.handleChange}
                 errorMessage={errorPass}
-                errorText={"неверный пароль"}
               />
             </div>
           </div>

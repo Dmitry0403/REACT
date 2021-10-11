@@ -6,17 +6,18 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { LoginPage } from "components/LoginPage/LoginPage";
+import { LoginPage } from "components/LoginPage";
 import { App } from "./components";
 
 class GlodalComponent extends React.Component {
   state = {
     isLogin: false,
   };
+
   handleComeToTrello = () => {
-    this.setState({
-      isLogin: true,
-    });
+    this.setState((prevState) => ({
+      isLogin: !prevState.isLogin,
+    }));
   };
 
   render() {
@@ -32,7 +33,11 @@ class GlodalComponent extends React.Component {
             )}
           </Route>
           <Route path="/trello">
-            {isLogin ? <App /> : <Redirect to="/login" />}
+            {isLogin ? (
+              <App onExitAccount={this.handleComeToTrello} />
+            ) : (
+              <Redirect to="./login" />
+            )}
           </Route>
           <Redirect to="/login" />
         </Switch>

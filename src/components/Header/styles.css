@@ -25,6 +25,10 @@
   color: rgb(133, 145, 163);
 }
 
+span {
+  padding: 2px;
+}
+
 .icon-menu {
   padding: 10px 30px;
 

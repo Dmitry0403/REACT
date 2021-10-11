@@ -11,13 +11,6 @@
   overflow-wrap: break-word;
 }
 
-
-.error{
-  font-size: 20px;
-  max-width: 250px;
-  border: red 3px solid;
-  border-radius: 3px;
-  color: red;
-  padding: 5px;
-  margin: 10px;
+.error {
+  border: red 4px solid;
 }
