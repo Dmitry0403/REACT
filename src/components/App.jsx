@@ -3,9 +3,9 @@ import "../styles/styles.css";
 import { Header } from "./Header";
 import { TasksBoard } from "./TasksBoard";
 import { TaskCard } from "./TaskCard";
-import { MenuCard } from "./MenuCard/MenuCard";
-import { PortModal } from "./PortModal/PortModal";
-import { EventCard } from "./EventCard/EventCard";
+import { MenuCard } from "./MenuCard";
+import { PortModal } from "./PortModal";
+import { EventCard } from "./EventCard";
 
 export const TASK_STATUSES = {
   todo: "todo",
@@ -107,10 +107,9 @@ export class App extends React.Component {
   };
 
   handleToggleMenuCard = () => {
-    const { isActiveMenuCard } = this.state;
-    this.setState({
-      isActiveMenuCard: !isActiveMenuCard,
-    });
+      this.setState((prevState) => ({
+        isActiveMenuCard: !prevState.isActiveMenuCard
+      }))
   };
 
   handleClickItemMenu = ({ target }) => {

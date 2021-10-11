@@ -5,9 +5,9 @@ import { Input } from "components/common";
 import { Button } from "components/common";
 import { PortModal } from "../PortModal";
 import { DateCard } from "../DateCard";
-import { EventCard } from "components/EventCard/EventCard";
-import { LimitCard } from "components/LimitCard/LimitCard";
-import { UsersCard } from "components/UsersCard/UsersCard";
+import { EventCard } from "components/EventCard";
+import { LimitCard } from "components/LimitCard";
+import { UsersCard } from "components/UsersCard";
 import { UserCardInfo } from "components/UsersCard/UserCardInfo";
 
 export class TaskCard extends React.Component {

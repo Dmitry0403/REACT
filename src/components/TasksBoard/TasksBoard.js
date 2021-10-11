@@ -1,9 +1,9 @@
 import React from "react";
 import "./styles.css";
 import { Card } from "../Card";
-import { EditableCard } from "components/EditableCard/EditableCard";
+import { EditableCard } from "components/EditableCard";
 import { TASK_STATUSES } from "components/App";
-import { ErrorBoundary } from "components/ErrorBoundary/ErrorBoundary";
+import { ErrorBoundary } from "components/ErrorBoundary";
 
 export function TasksBoard(props) {
   const tasksArray = props.tasksArray;

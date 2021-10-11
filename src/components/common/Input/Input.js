@@ -1,16 +1,10 @@
 import css from "./styles.module.css";
-const classNames = require("classnames");
+import classNames from "classnames";
 
 export function Input(props) {
-  let inputClass;
-  let placeholder;
-  if (!props.errorMessage) {
-    inputClass = classNames(css.input, props.className);
-    placeholder = props.placeholder;
-  } else {
-    inputClass = classNames(css.input, props.className, css.error);
-    placeholder = props.errorText;
-  }
+  const inputClass = classNames(css.input, props.className, {
+    [css.error]: Boolean(props.errorMessage),
+  });
 
   return (
     <div>
@@ -20,7 +14,7 @@ export function Input(props) {
         className={inputClass}
         onChange={props.onChange}
         onBlur={props.onBlur}
-        placeholder={placeholder}
+        placeholder={props.errorMessage || props.placeholder}
         value={props.value}
       />
     </div>

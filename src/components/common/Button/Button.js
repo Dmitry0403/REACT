@@ -1,5 +1,5 @@
 import css from "./styles.module.css";
-const classNames = require("classnames");
+import classNames from "classnames";
 
 export function Button(props) {
   const btnClass = classNames(css.button, props.className, props.icon);

@@ -3,8 +3,8 @@ import css from "./styles.module.css";
 import { User } from "./User";
 import { UserCardInfo } from "./UserCardInfo";
 import { Button } from "components/common";
-import { PortModal } from "../PortModal/PortModal";
-import { Loader } from "../Loader/Loader";
+import { PortModal } from "../PortModal/";
+import { Loader } from "../Loader";
 
 export class UsersCard extends React.Component {
   constructor(props) {

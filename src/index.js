@@ -6,7 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { LoginPage } from "components/LoginPage/LoginPage";
+import { LoginPage } from "components/LoginPage";
 import { App } from "./components";
 
 class GlodalComponent extends React.Component {
@@ -15,10 +15,9 @@ class GlodalComponent extends React.Component {
   };
 
   handleComeToTrello = () => {
-    const isLogin = this.state.isLogin;
-    this.setState({
-      isLogin: !isLogin,
-    });
+    this.setState((prevState) => ({
+      isLogin: !prevState.isLogin,
+    }));
   };
 
   render() {
