@@ -65,8 +65,8 @@ export class RegisterPage extends React.Component {
 
     usersArray = usersArray.concat([
       {
-        login: login,
-        password: password,
+        login,
+        password,
       },
     ]);
     localStorage.setItem("usersArray", JSON.stringify(usersArray));
