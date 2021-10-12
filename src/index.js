@@ -7,6 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { LoginPage } from "components/LoginPage";
+import { RegisterPage } from "components/RegisterPage";
 import { App } from "./components";
 
 class GlodalComponent extends React.Component {
@@ -21,7 +22,7 @@ class GlodalComponent extends React.Component {
   };
 
   render() {
-    const isLogin = this.state.isLogin;
+    const { isLogin } = this.state;
     return (
       <Router>
         <Switch>
@@ -32,11 +33,18 @@ class GlodalComponent extends React.Component {
               <LoginPage onComeToTrello={this.handleComeToTrello} />
             )}
           </Route>
+          <Route path="/register">
+            {isLogin ? (
+              <Redirect to="/trello" />
+            ) : (
+              <RegisterPage onComeToTrello={this.handleComeToTrello} />
+            )}
+          </Route>
           <Route path="/trello">
             {isLogin ? (
               <App onExitAccount={this.handleComeToTrello} />
             ) : (
-              <Redirect to="./login" />
+              <Redirect to="/login" />
             )}
           </Route>
           <Redirect to="/login" />
