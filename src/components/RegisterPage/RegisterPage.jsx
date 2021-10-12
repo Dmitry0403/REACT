@@ -113,11 +113,13 @@ export class RegisterPage extends React.Component {
             Сохранить
           </button>
         </form>
-        <button className={css.button} onClick={this.handelClickCancel}>
-          <Link className={css.link} to="/login">
-            Отмена
+        <div className={css.linkBtn}>
+          <Link to="/login">
+            <button className={css.button} onClick={this.handelClickCancel}>
+              Отмена
+            </button>
           </Link>
-        </button>
+        </div>
       </div>
     );
   }

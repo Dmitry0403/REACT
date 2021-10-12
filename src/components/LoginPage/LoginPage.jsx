@@ -22,7 +22,10 @@ export class LoginPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const usersArray = JSON.parse(localStorage.getItem("usersArray"));
+    let usersArray = [];
+    if (localStorage.getItem("usersArray")) {
+      usersArray = JSON.parse(localStorage.getItem("usersArray"));
+    }
 
     const {
       values: { login, password },
@@ -88,11 +91,11 @@ export class LoginPage extends React.Component {
             Войти
           </button>
         </form>
-        <button className={css.button}>
-          <Link className={css.link} to="/register">
-            Регистрация
+        <div className={css.linkBtn}>
+          <Link to="/register">
+            <button className={css.button}>Регистрация</button>
           </Link>
-        </button>
+        </div>
       </div>
     );
   }

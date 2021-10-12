@@ -30,10 +30,12 @@ label {
   cursor: pointer;
   font-size: 25px;
   font-weight: 500;
- 
+  margin-bottom: 10px;
 }
 
-.link {
+.linkBtn {
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   color: black;
 }
