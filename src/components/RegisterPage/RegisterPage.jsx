@@ -3,13 +3,23 @@ import css from "./styles.module.css";
 import { Input } from "components/common";
 import { Link } from "react-router-dom";
 
-export class LoginPage extends React.Component {
+export class RegisterPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      usersArray: [],
       values: { login: "", password: "" },
       errors: { login: "", password: "" },
     };
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem("usersArray")) {
+      const usersArray = JSON.parse(localStorage.getItem("usersArray"));
+      this.setState({
+        usersArray,
+      });
+    }
   }
 
   handleChange = (e) => {
@@ -21,30 +31,45 @@ export class LoginPage extends React.Component {
   };
 
   handleSubmit = (e) => {
-    e.preventDefault();
-    const usersArray = JSON.parse(localStorage.getItem("usersArray"));
-
-    const {
+    let {
+      usersArray,
       values: { login, password },
     } = this.state;
 
-    const user = usersArray.find((user) => user.login === login);
+    e.preventDefault();
 
-    if (!user) {
+    if (!login.trim()) {
       this.setState((prevState) => ({
-        errors: { ...prevState.errors, login: "неверный логин" },
+        errors: { ...prevState.erros, login: "введите логин" },
+      }));
+      return;
+    }
+
+    if (!password.trim()) {
+      this.setState((prevState) => ({
+        errors: { ...prevState.erros, password: "введите пароль" },
+      }));
+      return;
+    }
+
+    if (usersArray.find((user) => user.login === login)) {
+      this.setState((prevState) => ({
+        errors: {
+          ...prevState.errors,
+          login: "упс, такой логин уже есть",
+        },
         values: { ...prevState.values, login: "" },
       }));
       return;
     }
 
-    if (password !== user.password) {
-      this.setState((prevState) => ({
-        errors: { ...prevState.errors, password: "неверный пароль" },
-        values: { ...prevState.values, password: "" },
-      }));
-      return;
-    }
+    usersArray = usersArray.concat([
+      {
+        login: login,
+        password: password,
+      },
+    ]);
+    localStorage.setItem("usersArray", JSON.stringify(usersArray));
     this.props.onComeToTrello();
   };
 
@@ -56,10 +81,10 @@ export class LoginPage extends React.Component {
 
     return (
       <div className={css.wrapper}>
-        <h1>Введите логин и пароль</h1>
+        <h1>Регистрация</h1>
         <form className={css.userForm} onSubmit={this.handleSubmit}>
           <div>
-            <label>Ваш логин:</label>
+            <label>Введите логин:</label>
             <div>
               <Input
                 type="text"
@@ -72,7 +97,7 @@ export class LoginPage extends React.Component {
             </div>
           </div>
           <div>
-            <label>Ваш пароль:</label>
+            <label>Введите пароль:</label>
             <div>
               <Input
                 type="password"
@@ -85,12 +110,12 @@ export class LoginPage extends React.Component {
             </div>
           </div>
           <button type="submit" className={css.button}>
-            Войти
+            Сохранить
           </button>
         </form>
-        <button className={css.button}>
-          <Link className={css.link} to="/register">
-            Регистрация
+        <button className={css.button} onClick={this.handelClickCancel}>
+          <Link className={css.link} to="/login">
+            Отмена
           </Link>
         </button>
       </div>

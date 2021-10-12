@@ -17,20 +17,19 @@ label {
   text-align: center;
 }
 
-.userName, .userPass {
+.userName,
+.userPass {
   font-size: 25px;
   max-width: 380px;
   margin-bottom: 40px;
 }
 
-
 .button {
   min-width: 200px;
-  height: 50px;
+  min-height: 50px;
   cursor: pointer;
   font-size: 25px;
   font-weight: 500;
- 
 }
 
 .link {
