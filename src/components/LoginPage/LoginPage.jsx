@@ -2,6 +2,7 @@ import React from "react";
 import css from "./styles.module.css";
 import { Input } from "components/common";
 import { Link } from "react-router-dom";
+import { LINKS } from "index";
 
 export class LoginPage extends React.Component {
   constructor(props) {
@@ -92,7 +93,7 @@ export class LoginPage extends React.Component {
           </button>
         </form>
         <div className={css.linkBtn}>
-          <Link to="/register">
+          <Link to={LINKS.reg}>
             <button className={css.button}>Регистрация</button>
           </Link>
         </div>

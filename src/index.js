@@ -10,6 +10,12 @@ import { LoginPage } from "components/LoginPage";
 import { RegisterPage } from "components/RegisterPage";
 import { App } from "./components";
 
+export const LINKS = {
+  reg: "/register",
+  log: "/login",
+  trello: "/trello",
+}
+
 class GlodalComponent extends React.Component {
   state = {
     isLogin: false,
@@ -26,28 +32,28 @@ class GlodalComponent extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/login">
+          <Route path={LINKS.log}>
             {isLogin ? (
-              <Redirect to="/trello" />
+              <Redirect to={LINKS.trello} />
             ) : (
               <LoginPage onComeToTrello={this.handleComeToTrello} />
             )}
           </Route>
-          <Route path="/register">
+          <Route path={LINKS.reg}>
             {isLogin ? (
-              <Redirect to="/trello" />
+              <Redirect to={LINKS.trello} />
             ) : (
               <RegisterPage onComeToTrello={this.handleComeToTrello} />
             )}
           </Route>
-          <Route path="/trello">
+          <Route path={LINKS.trello}>
             {isLogin ? (
               <App onExitAccount={this.handleComeToTrello} />
             ) : (
-              <Redirect to="/login" />
+              <Redirect to={LINKS.log} />
             )}
           </Route>
-          <Redirect to="/login" />
+          <Redirect to={LINKS.log} />
         </Switch>
       </Router>
     );
