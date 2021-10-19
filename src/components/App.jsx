@@ -14,28 +14,42 @@ export const TASK_STATUSES = {
 };
 
 export class App extends React.Component {
-  state = {
-    isActiveTaskCard: false,
-    isActiveMenuCard: false,
-    isActivePortModal: false,
-    tasksArray: [],
-    activeTask: {},
-    menuItems: { title: "", text: "", nameList: "" },
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActiveTaskCard: false,
+      isActiveMenuCard: false,
+      isActivePortModal: false,
+      tasksArray: [],
+      activeTask: {},
+      menuItems: { title: "", text: "", nameList: "" },
+    };
+  }
 
   componentDidMount() {
-    if (localStorage.getItem("tasksArray")) {
-      const tasksArray = JSON.parse(localStorage.getItem("tasksArray"));
+    const { login } = this.props;
+    const user = JSON.parse(localStorage.getItem("usersArray")).find(
+      (item) => item.login === login
+    );
+    if (user.hasOwnProperty("tasksArray")) {
       this.setState({
-        tasksArray,
+        tasksArray: user.tasksArray,
       });
     }
   }
 
   componentDidUpdate(_, prevState) {
-    const tasksArray = this.state.tasksArray;
-    if (this.state.tasksArray !== prevState.tasksArray) {
-      localStorage.setItem("tasksArray", JSON.stringify(tasksArray));
+    const { tasksArray } = this.state;
+    if (tasksArray !== prevState.tasksArray) {
+      const { login } = this.props;
+      const users = JSON.parse(localStorage.getItem("usersArray"));
+      const usersArray = users.map((user) => {
+        if (user.login === login) {
+          user.tasksArray = tasksArray;
+        }
+        return user;
+      });
+      localStorage.setItem("usersArray", JSON.stringify(usersArray));
     }
   }
 
@@ -107,9 +121,9 @@ export class App extends React.Component {
   };
 
   handleToggleMenuCard = () => {
-      this.setState((prevState) => ({
-        isActiveMenuCard: !prevState.isActiveMenuCard
-      }))
+    this.setState((prevState) => ({
+      isActiveMenuCard: !prevState.isActiveMenuCard,
+    }));
   };
 
   handleClickItemMenu = ({ target }) => {

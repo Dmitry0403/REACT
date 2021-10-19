@@ -49,7 +49,7 @@ export class LoginPage extends React.Component {
       }));
       return;
     }
-    this.props.onComeToTrello();
+    this.props.onComeToTrello(login);
   };
 
   render() {

@@ -71,7 +71,7 @@ export class RegisterPage extends React.Component {
       },
     ]);
     localStorage.setItem("usersArray", JSON.stringify(usersArray));
-    this.props.onComeToTrello();
+    this.props.onComeToTrello(login);
   };
 
   render() {
