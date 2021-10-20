@@ -45,7 +45,7 @@ export class App extends React.Component {
       const users = JSON.parse(localStorage.getItem("usersArray"));
       const usersArray = users.map((user) => {
         if (user.login === login) {
-          user.tasksArray = tasksArray;
+          return { ...user, tasksArray };
         }
         return user;
       });
@@ -56,10 +56,11 @@ export class App extends React.Component {
   handleEditEnd = (value) => {
     if (!value.trim()) return;
     const tasksArray = this.state.tasksArray;
+    const newTasksArray = tasksArray.concat([
+      { title: value, position: "todo", id: Date.now() },
+    ]);
     this.setState({
-      tasksArray: tasksArray.concat([
-        { title: value, position: "todo", id: Date.now() },
-      ]),
+      tasksArray: newTasksArray,
       isActive: false,
     });
   };
@@ -84,14 +85,14 @@ export class App extends React.Component {
 
   handleEditMoving = (obj, position) => {
     const tasksArray = this.state.tasksArray;
-    tasksArray.map((task) => {
+    const newTasksArray = tasksArray.map((task) => {
       if (task.id === obj.id) {
         task.position = position;
       }
       return task;
     });
     this.setState({
-      tasksArray,
+      tasksArray: newTasksArray,
       isActiveTaskCard: false,
     });
   };
