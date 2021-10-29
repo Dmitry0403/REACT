@@ -2,6 +2,7 @@ import React from "react";
 import css from "./styles.module.css";
 import { Input } from "components/common";
 import { Link } from "react-router-dom";
+import { LINKS } from "index";
 
 export class RegisterPage extends React.Component {
   constructor(props) {
@@ -70,7 +71,7 @@ export class RegisterPage extends React.Component {
       },
     ]);
     localStorage.setItem("usersArray", JSON.stringify(usersArray));
-    this.props.onComeToTrello();
+    this.props.onComeToTrello(login);
   };
 
   render() {
@@ -114,7 +115,7 @@ export class RegisterPage extends React.Component {
           </button>
         </form>
         <div className={css.linkBtn}>
-          <Link to="/login">
+          <Link to={LINKS.log}>
             <button className={css.button} onClick={this.handelClickCancel}>
               Отмена
             </button>
