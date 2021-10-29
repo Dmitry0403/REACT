@@ -6,6 +6,7 @@ import { TaskCard } from "./TaskCard";
 import { MenuCard } from "./MenuCard";
 import { PortModal } from "./PortModal";
 import { EventCard } from "./EventCard";
+import { v4 as uuidv4 } from "uuid"
 
 export const TASK_STATUSES = {
   todo: "todo",
@@ -57,7 +58,7 @@ export class App extends React.Component {
     if (!value.trim()) return;
     const tasksArray = this.state.tasksArray;
     const newTasksArray = tasksArray.concat([
-      { title: value, position: "todo", id: Date.now() },
+      { title: value, position: "todo", id: uuidv4() },
     ]);
     this.setState({
       tasksArray: newTasksArray,
